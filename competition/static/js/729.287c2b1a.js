@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkedu"]=self["webpackChunkedu"]||[]).push([[729],{729:function(e,u,n){n.r(u),n.d(u,{default:function(){return _}});var t=function(){var e=this,u=e._self._c;e._self._setupProxy;return u("div",[e._v("custom content")])},r=[],s=(n(25389),{__name:"project",setup(e){return{__sfc:!0}}}),c=s,l=n(1001),f=(0,l.Z)(c,t,r,!1,null,null,null),_=f.exports}}]);
