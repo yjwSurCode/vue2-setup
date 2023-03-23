@@ -83,6 +83,8 @@ const form = ref({ name: '', pwd: '' });
 
 const cancle = () => {
   console.log('1');
+  $VM.$store.commit('changeNavbar', '3');
+  $VM.$router.replace({ path: '/', query: { id: '1', type: 'home' } });
 };
 
 const confirm = async () => {

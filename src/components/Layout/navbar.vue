@@ -15,7 +15,19 @@
         <img src="../../assets/images/icon.jpg" style="margin-top: -5px; width: 120px; padding: 10px 10px" />
       </el-menu-item>
       <el-menu-item index="3">首页</el-menu-item>
-      <el-menu-item index="4">赛事介绍</el-menu-item>
+      <el-submenu index="4">
+        <template slot="title">赛事介绍</template>
+        <el-menu-item index="4-1">报名须知</el-menu-item>
+        <el-menu-item index="4-2">守则警告</el-menu-item>
+        <el-menu-item index="4-3">赛制安排</el-menu-item>
+        <el-menu-item index="4-4">赛制规则</el-menu-item>
+        <el-menu-item index="4-5">赛事介绍</el-menu-item>
+        <!-- <el-submenu index="4-3">
+          <template slot="title">选项4</template>
+          <el-menu-item index="4-3-1">选项1</el-menu-item>
+          <el-menu-item index="4-3-2">选项2</el-menu-item>
+        </el-submenu> -->
+      </el-submenu>
       <el-menu-item index="5">
         <!-- <router-link to="/enroll">home</router-link> -->
         参赛学校</el-menu-item
@@ -24,8 +36,15 @@
       <el-menu-item index="7">比赛历程</el-menu-item>
       <el-menu-item index="8">报名系统</el-menu-item>
       <el-menu-item index="9">赛事管理</el-menu-item>
-      <el-menu-item index="10">联系我们</el-menu-item>
-      <el-menu-item index="11" :style="{ right: '50px', position: 'absolute' }">
+      <el-submenu index="10">
+        <template slot="title">赛事分组</template>
+        <el-menu-item index="10-1">海选</el-menu-item>
+        <el-menu-item index="10-2">预赛</el-menu-item>
+        <el-menu-item index="10-3">复赛</el-menu-item>
+        <el-menu-item index="10-4">正赛</el-menu-item>
+      </el-submenu>
+      <el-menu-item index="11">联系我们</el-menu-item>
+      <el-menu-item index="12" :style="{ right: '50px', position: 'absolute' }">
         <el-input
           :style="{ marginLeft: '0px' }"
           placeholder="请输入内容"
@@ -36,7 +55,7 @@
         </el-input>
       </el-menu-item>
 
-      <el-menu-item index="11" :style="{ right: '0px', position: 'absolute' }">
+      <el-menu-item index="13" :style="{ right: '0px', position: 'absolute' }">
         <el-dropdown @command="callbackM">
           <i class="el-icon-user"></i>
           <!-- <span class="el-dropdown-link"> 下拉菜单<i class="el-icon-arrow-down el-icon--right"></i> </span> -->
@@ -126,12 +145,27 @@ const callbackM = () => {
   console.log(1);
   localStorage.removeItem('userAccount');
   localStorage.removeItem('token');
+
+  $VM.$message({
+    message: '退出成功',
+    type: 'success'
+  });
+  setTimeout(() => {
+    router.go(0);
+  }, 1000);
 };
 
 const logoutM = () => {
   console.log(2);
   localStorage.removeItem('userAccount');
   localStorage.removeItem('token');
+  $VM.$message({
+    message: '退出成功',
+    type: 'success'
+  });
+  setTimeout(() => {
+    router.go(0);
+  }, 1000);
 };
 const handleUser = () => {
   console.log(1);
@@ -163,20 +197,33 @@ const handleSelect = (index: string) => {
         duration: 3000
       });
       break;
+    case '4-1':
+      $VM.$store.commit('changeNavbar', '4-1');
+      router.replace({ path: '/exp/notice', query: { id: '1', type: 'home' } });
+      break;
+    case '4-2':
+      $VM.$store.commit('changeNavbar', '4-2');
+      router.replace({ path: '/exp/warn', query: { id: '1', type: 'home' } });
+      break;
+    case '4-3':
+      $VM.$store.commit('changeNavbar', '4-3');
+      router.replace({ path: '/exp/arrange', query: { id: '1', type: 'home' } });
+      break;
+    case '4-4':
+      $VM.$store.commit('changeNavbar', '4-4');
+      router.replace({ path: '/exp/rule', query: { id: '1', type: 'home' } });
+      break;
+    case '4-5':
+      $VM.$store.commit('changeNavbar', '4-5');
+      router.replace({ path: '/exp/introduce', query: { id: '1', type: 'home' } });
+      break;
     case '5':
       $VM.$store.commit('changeNavbar', '5');
-      $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
-      });
+      router.replace({ path: '/exp/school', query: { id: '1', type: 'home' } });
       break;
     case '6':
-      $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
-      });
+      $VM.$store.commit('changeNavbar', '6');
+      router.replace({ path: '/exp/integral', query: { id: '1', type: 'home' } });
       break;
     case '7':
       $VM.$notify({
@@ -190,13 +237,37 @@ const handleSelect = (index: string) => {
       router.replace({ path: '/enroll', query: { id: '1', type: 'home' } });
       break;
     case '9':
+      window.location.href = 'http://129.211.219.138:8081';
+      break;
+    case '10-1':
       $VM.$notify({
         title: '提示',
         message: '正在建设中。',
         duration: 3000
       });
       break;
-    case '10':
+    case '10-2':
+      $VM.$notify({
+        title: '提示',
+        message: '正在建设中。',
+        duration: 3000
+      });
+      break;
+    case '10-3':
+      $VM.$notify({
+        title: '提示',
+        message: '正在建设中。',
+        duration: 3000
+      });
+      break;
+    case '10-4':
+      $VM.$notify({
+        title: '提示',
+        message: '正在建设中。',
+        duration: 3000
+      });
+      break;
+    case '11':
       $VM.$notify({
         title: '提示',
         message: '正在建设中。',
@@ -220,8 +291,17 @@ const handleSelect = (index: string) => {
     height: 65px;
   }
 
+  .el-submenu > .el-submenu__title {
+    border-bottom: none;
+    text-decoration: none;
+    height: 65px !important;
+  }
+
   //! 改变背景颜色
   .el-menu-item:hover {
+    background-color: rgb(75, 74, 74) !important;
+  }
+  .el-submenu__title:hover {
     background-color: rgb(75, 74, 74) !important;
   }
 

@@ -18,7 +18,7 @@ export default new Vuex.Store({
   },
   //数据
   state: {
-    navbarSelect: '3',
+    navbarSelect: localStorage.getItem('navbarSelect') || '3',
     user: { name: '', roles: '' },
     permission: { addRouters: '', routers: '' },
     userInfo: { info: '', token: '' }
@@ -38,6 +38,7 @@ export default new Vuex.Store({
   mutations: {
     changeNavbar: (state, paylod) => {
       console.log(state, paylod, 'state,paylod');
+      localStorage.setItem('navbarSelect', paylod);
       // 变更状态
       state.navbarSelect = paylod;
     }

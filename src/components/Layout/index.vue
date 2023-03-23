@@ -43,11 +43,13 @@ export default {
   /* footer+header 180 + 65  如果header占布局就只减header高度65 */
   min-height: calc(100% - 65px);
   box-sizing: border-box;
-  padding-bottom: 65px+ 180 * 0.7px;
+  //!控制度 footer narbar 之间的
+  padding-bottom: 65px+ 180 * 0.6px;
   background: #f5f5f5;
 }
 
 .footer-layout {
+  //! 里面子元素设置padding
   max-height: 180px;
   height: 180px;
   margin-top: -180px;

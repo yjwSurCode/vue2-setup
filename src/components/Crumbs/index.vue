@@ -5,8 +5,10 @@
         <img :style="{ width: '10px', height: '10px' }" src="@/assets/svg/home.svg" alt="" />
         首页</el-breadcrumb-item
       >
-      <el-breadcrumb-item :to="{ path: '/' }">报名系统</el-breadcrumb-item>
-      <el-breadcrumb-item class="currentTab" :style="{ color: 'blue' }">报名</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }"> {{ title ? title.split('-')[0] : '报名系统' }}</el-breadcrumb-item>
+      <el-breadcrumb-item class="currentTab" :style="{ color: 'blue' }">{{
+        title ? title.split('-')[1] : '报名'
+      }}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -27,6 +29,17 @@ import {
   getCurrentInstance,
   Directive
 } from 'vue';
+
+withDefaults(
+  defineProps<{
+    title: string;
+    // list: number[];
+  }>(),
+  {
+    title: '',
+    // list: () => [4, 5, 6]
+  }
+);
 </script>
 <style lang="scss">
 /* 不被选中时的颜色 */

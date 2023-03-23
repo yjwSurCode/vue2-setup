@@ -24,6 +24,10 @@ git config pull.rebase false
 
 
 
+外网面板地址:  http://129.211.219.138:8888/850b1ff1
+内网面板地址:  http://10.206.0.16:8888/850b1ff1
+
+
 
 
  if (newV === 0) {

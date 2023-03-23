@@ -57,28 +57,47 @@ const routes: Array<any> = [
     children: [
       // { path: "", component: () => import("@/views/exp/index.vue") },
       {
-        path: 'list',
-        // subPath: "/exp",
-        name: 'list',
-        // component: () => import('@/views/exp/list/index.vue')
+        path: 'notice',
+        name: 'notice',
+        component: () => import('@/views/exp/notice/index.vue')
       },
       {
-        path: 'detail',
-        // subPath: "/exp",
-        name: 'detail',
-        component: ExpDetail
+        path: 'warn',
+        name: 'warn',
+        component: () => import('@/views/exp/warn/index.vue')
+      },
+      {
+        path: 'arrange',
+        name: 'arrange',
+        component: () => import('@/views/exp/arrange/index.vue')
+      },
+      {
+        path: 'rule',
+        name: 'rule',
+        component: () => import('@/views/exp/rule/index.vue')
+      },
+      {
+        path: 'introduce',
+        name: 'introduce',
+        component: () => import('@/views/exp/introduce/index.vue')
+      },
+      {
+        path: 'school',
+        name: 'school',
+        component: () => import('@/views/exp/school/index.vue')
+      },
+      {
+        path: 'integral',
+        name: 'integral',
+        component: () => import('@/views/exp/integral/index.vue')
       },
       {
         path: 'tutor',
         // subPath: "/exp",
-        name: 'tutor',
+        name: 'tutor'
         // component: () => import('@/views/exp/tutor/index.vue')
       }
     ]
-  },
-  {
-    path: '/competition',
-    component: () => import('@/views/competition/index.vue')
   },
   {
     path: '/enroll',
@@ -87,8 +106,8 @@ const routes: Array<any> = [
 ];
 
 const router = new VueRouter({
-  // mode: 'history',
-  mode: 'hash',
+  mode: 'history',
+  // mode: 'hash',
   base: process.env.BASE_URL,
   routes
 });

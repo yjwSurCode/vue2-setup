@@ -1,3 +1,5 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <template>
   <Layout>
     <Crumbs />
@@ -122,9 +124,9 @@
         </div>
 
         <div class="form-item">
-          <el-form-item label="天凤昵称" required prop="tfNickName">
+          <el-form-item label="天凤昵称" required prop="tfNickname">
             <div class="form-discribe">请填写天凤昵称</div>
-            <el-input v-model="form.tfNickName" placeholder="请输入"></el-input>
+            <el-input v-model="form.tfNickname" placeholder="请输入"></el-input>
           </el-form-item>
         </div>
 
@@ -146,11 +148,12 @@
         </div>
 
         <div class="form-item">
-          <el-form-item label="在籍状态" required prop="state">
+          <el-form-item label="在籍状态" required prop="stuStatus">
             <div class="form-discribe">请选择在籍状态</div>
-            <el-select v-model="form.state" placeholder="请选择">
-              <el-option label="在校生" value="在校生">在校生</el-option>
-              <el-option label="毕业生" value="毕业生">毕业生</el-option>
+            <!-- {{ scope.row.stuStatus ==1 ?'在校生':'毕业生' }} -->
+            <el-select v-model="form.stuStatus" placeholder="请选择">
+              <el-option label="在校生" :value="1">在校生</el-option>
+              <el-option label="毕业生" :value="0">毕业生</el-option>
             </el-select>
           </el-form-item>
         </div>
@@ -158,7 +161,9 @@
         <div class="form-item">
           <el-form-item label="在校证明" required prop="certificateImgs">
             <div class="form-discribe-p">
-              请已确定的带队领队附上自己的在校信息，在读证明，在校证明，学生证等。并且用空白
+              {{
+                !form.isLeader ? '请已确定的队员' : '请已确定的领队'
+              }}附上自己的在校信息，在读证明，在校证明，学生证等。并且用空白
               纸张书写上自己昵称，一并拍照上传。请勿遮挡姓名，有效期，年级和学校名称等；
             </div>
             <!-- :on-preview="handlePictureCardPreview"
@@ -349,10 +354,11 @@ const beforeAvatarUpload = (file) => {
 };
 const handleRemove = (file, fileList) => {
   console.log(file, fileList);
+
   form.certificateImgs = [];
 };
 const handleUpload = (file, fileList) => {
-  console.log(file, fileList);
+  console.log('handleUpload', file, fileList);
 };
 const handleProgress = (file, fileList) => {
   console.log('handleChange', file, fileList);
@@ -363,19 +369,21 @@ const handleSuccess = (file, fileList) => {
 
 const handleChange = async (file, fileList) => {
   console.log('handleChange', file, fileList);
-
+  const currentFileName = ref('图片');
   const res = await CompetitionCaseApi.file_upload({
-    files: fileList
+    files: [fileList[fileList.length - 1]]
   }).then((e) => {
     console.log(e, 'result');
 
     if (e.code === 200) {
       setTimeout(() => {
         $VM.$message({
-          message: '上传成功',
+          message: `${file.name}上传成功`,
           type: 'success'
         });
       }, 500);
+      form.certificateImgs.push(...e.body);
+      // currentFileName.value = file.name;
     } else {
       //!  处理页面 上传样式
       $VM.$message({
@@ -383,10 +391,7 @@ const handleChange = async (file, fileList) => {
         type: 'error'
       });
     }
-
-    form.certificateImgs.push(...e.body);
   });
-
   // form.certificateImgs = fileList;
 };
 
@@ -429,11 +434,11 @@ const form = reactive({
   //! uid
   uid: '',
   //! 天凤昵称
-  tfNickName: '',
+  tfNickname: '',
   //! 天凤段位
   tfSegment: '',
   //! 状态
-  state: ''
+  stuStatus: ''
   //3 此用户身份账户
   // identityKey: ''
 });
@@ -463,9 +468,9 @@ const rules = ref({
   school: [{ required: true, message: '请输入学校昵称', trigger: 'change' }],
   qhNickname: [{ required: true, message: '请填写雀魂昵称', trigger: 'change' }],
   qhSegment: [{ required: true, message: '请选择雀魂段位', trigger: 'change' }],
-  tfNickName: [{ required: true, message: '请填写天凤昵称', trigger: 'change' }],
+  tfNickname: [{ required: true, message: '请填写天凤昵称', trigger: 'change' }],
   tfSegment: [{ required: true, message: '请选择天凤段位', trigger: 'change' }],
-  state: [
+  stuStatus: [
     { required: true, message: '请选择在籍状态', trigger: 'change' }
     // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
   ],
@@ -504,11 +509,11 @@ const rules2 = ref({
   //! uid
   uid: true,
   //! 天凤昵称
-  tfNickName: true,
+  tfNickname: true,
   //! 天凤段位
   tfSegment: true,
   //! 状态
-  state: true
+  stuStatus: true
 });
 
 watch(
@@ -547,11 +552,11 @@ watch(
         //! uid
         uid: true,
         //! 天凤昵称
-        tfNickName: true,
+        tfNickname: true,
         //! 天凤段位
         tfSegment: true,
         //! 状态
-        state: true
+        stuStatus: true
       };
     } else {
       // 是领队
@@ -585,11 +590,11 @@ watch(
         //! uid
         uid: true,
         //! 天凤昵称
-        tfNickName: true,
+        tfNickname: true,
         //! 天凤段位
         tfSegment: true,
         //! 状态
-        state: true
+        stuStatus: true
       };
     }
   }
@@ -601,6 +606,12 @@ const handleDropdown = (e) => {
 
 const submitForm = (formName) => {
   console.log(formRef.value.model, formRef.value['formRef'], formRef.value, 'formRef.value[formName]', form);
+
+  // $VM.$message({
+  //   message: '暂时关闭',
+  //   type: 'error'
+  // });
+  // return;
 
   if (rules2.value.isLeader == true && !form.signImg) {
     $VM.$message({
@@ -620,12 +631,13 @@ const submitForm = (formName) => {
 
   formRef.value.validate((valid) => {
     if (valid) {
+      console.log(form.certificateImgs, 'form.certificateImgs');
       //! 数组转字符串
       const param = { ...form, certificateImgs: form.certificateImgs.join(',') };
       console.log(param, 'param');
+      // return;
       const res = CompetitionCaseApi.enroll(param).then((e) => {
         console.log('eeeee', e);
-
         if (e.value == '操作成功') {
           $VM.$message({
             message: '提交成功',
@@ -666,19 +678,25 @@ const submitForm = (formName) => {
           //   //! uid
           //   uid: '',
           //   //! 天凤昵称
-          //   tfNickName: '',
+          //   tfNickname: '',
           //   //! 天凤段位
           //   tfSegment: '',
           //   //! 状态
-          //   state: ''
+          //   stuStatus: ''
           //   //3 此用户身份账户
           //   // identityKey: ''
           // });
         } else {
           $VM.$message({
-            message: '提交失败,请尝试重新登录提交',
-            type: 'error'
+            message: '提交失败,请尝试重新登录再提交',
+            type: 'error',
+            duration: 2000
           });
+          localStorage.removeItem('userAccount');
+          localStorage.removeItem('token');
+          setTimeout(() => {
+            router.go(0);
+          }, 2000);
         }
       });
 

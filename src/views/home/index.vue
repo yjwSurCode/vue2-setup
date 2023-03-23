@@ -3,17 +3,15 @@
     <Layout>
       <div class="home-page">
         <el-carousel trigger="click" height="300px">
-          <el-carousel-item v-for="(item, index) in 4" :key="index">
-            <img class="swiper-img" src="../../assets/images/swiper.png" alt="" />
+          <el-carousel-item v-for="(item, index) in swiperList" :key="index">
+            <img class="swiper-img" :src="item.img" alt="" />
           </el-carousel-item>
         </el-carousel>
 
         <div class="intur">
-          <div :style="{ textAlign: 'left', fontWeight: 'bold', fontSize: '30px' }">
-            赛事介绍
-          </div>
+          <div :style="{ textAlign: 'left', fontWeight: 'bold', fontSize: '30px' }">赛事介绍</div>
           <p class="intur-text">
-            立直麻将高校联赛起源于上海高校日本麻将团体赛（简称上高赛、搞笑杯），于204年由上海财经大学与复旦大学携手创办。从第一届比赛以来，为立直麻将的推广和交流做出了重要的
+            立直麻将高校联赛起源于上海高校日本麻将团体赛（简称上高赛、高校杯），于2004年由上海财经大学与复旦大学携手创办。从第一届比赛以来，为立直麻将的推广和交流做出了重要的
             贡献。本赛事将继承传统，提供一个能体现竞技麻将精神的平台，继续为各校爱好者提供良好的交流平台，促进友好关系。
             <br style="margin: 10px; height: 50px" />
             <span :style="{ display: 'block' }"> &nbsp; </span>
@@ -21,9 +19,7 @@
             寻求契机慢慢发展，将这一系列比赛努力办下去，也希望可以得到圈内更多的理解，认可和支持。
           </p>
           <div :style="{ textAlign: 'left' }">
-            <el-button plain type="primary" @click="goDetail"
-              >了解我们<i class="el-icon-d-arrow-right"></i
-            ></el-button>
+            <el-button plain type="primary" @click="goDetail">了解我们<i class="el-icon-d-arrow-right"></i></el-button>
           </div>
 
           <div class="intur-content">
@@ -32,13 +28,9 @@
                 src="@/assets/images/us_left_arrow.png"
                 alt=""
               /> -->
-            <el-carousel :interval="4000" type="card" height="200px">
-              <el-carousel-item
-                v-for="(item, index) in inturList"
-                :key="index"
-                :label="`${item.text}`"
-              >
-                <img class="intur-content-img" :src="item.img" alt="" />
+            <el-carousel :interval="4000" type="card" height="240px" width="480px">
+              <el-carousel-item v-for="(item, index) in inturList" :key="index" :label="`${item.text}`">
+                <img class="intur-content-img" @click.prevent="goS(index)" :src="item.img" alt="" />
                 <div>123</div>
               </el-carousel-item>
             </el-carousel>
@@ -66,16 +58,28 @@
           src="../../assets/images/home1.png"
           alt=""
         />
-        <img
-          :style="{ width: '100%' }"
-          @click="goDetail"
-          src="../../assets/images/home.png"
-          alt=""
-        />
+        <img :style="{ width: '100%', display: 'block' }" @click="goDetail" src="../../assets/images/home.png" alt="" />
 
-        <div class="info">
+        <div :style="{ position: 'relative' }">
+          <img
+            :style="{ width: '100%', display: 'block' }"
+            @click="goDetail"
+            src="../../assets/images/home-z.png"
+            alt=""
+          />
+          <div class="info" @click="goAdmin">
+            <img
+              class="info-img"
+              :style="{ width: '200px', height: '40px', display: 'block' }"
+              @click="goDetail"
+              src="../../assets/images/d_home-right.png"
+              alt=""
+            />
+            <div class="info-text">赛事管理</div>
+          </div>
+        </div>
+        <!-- <div class="info">
           <div class="info-title">赛事管理</div>
-
           <div class="project-card" @click="goTutor">
             <el-row :style="{ display: 'flex', justifyContent: 'center' }">
               <el-col :span="0.5" style="margin-left: 2%; margin-top: 100px">
@@ -104,7 +108,7 @@
               </el-col>
             </el-row>
           </div>
-        </div>
+        </div> -->
       </div>
     </Layout>
     <!-- <div>8998---{{ homePageData?.size }}</div> -->
@@ -113,8 +117,8 @@
 
 <script setup>
 // eslint-disable-next-line prettier/prettier
-import Layout from "../../components/Layout/index.vue";
-import inturList1 from "../../components/Layout/index.vue";
+import Layout from '../../components/Layout/index.vue';
+import inturList1 from '../../components/Layout/index.vue';
 import {
   withDefaults,
   defineProps,
@@ -129,54 +133,80 @@ import {
   watchEffect,
   getCurrentInstance,
   Directive,
-  onMounted,
-} from "vue";
-import { CompetitionCaseApi } from "../../services/portal-svc";
+  onMounted
+} from 'vue';
+import { CompetitionCaseApi } from '../../services/portal-svc';
 
 const useVM = () => {
   const vm = getCurrentInstance();
-  if (!vm) throw new Error("must be called in setup");
+  if (!vm) throw new Error('must be called in setup');
   return vm.proxy;
 };
 const $VM = useVM();
 
 const inturList = ref([
-  { img: require("@/assets/images/矩形 5 副本 6@2x.png"), text: "第一届" },
-  { img: require("@/assets/images/矩形 5 副本 7@2x.png"), text: "第二届" },
-  { img: require("@/assets/images/矩形 5 副本 8@2x.png"), text: "第三届" },
+  { img: require('@/assets/images/A1.jpg'), text: '第一届' },
+  { img: require('@/assets/images/A2.jpg'), text: '第二届' },
+  { img: require('@/assets/images/A3.jpg'), text: '第三届' }
+]);
+
+const swiperList = ref([
+  { img: require('@/assets/temp/swiper1.jpg'), text: '1' },
+  { img: require('@/assets/temp/swiper2.jpg'), text: '1' },
+  { img: require('@/assets/temp/swiper3.jpg'), text: '1' },
+  { img: require('@/assets/temp/swiper4.jpg'), text: '1' }
 ]);
 
 const homePageData = ref();
 
 const initPageData = async () => {
   const res = await CompetitionCaseApi.join_room({
-    roomId: 1,
+    roomId: 1
   });
 
   homePageData.value = res.body;
-  console.log(res, "res", homePageData.value);
+  console.log(res, 'res', homePageData.value);
 };
 
 onMounted(() => {
-  console.log("init");
+  console.log('init');
   initPageData();
 });
 
-const goDetail = () => {
-  console.log("getCurrentInstance().proxy", getCurrentInstance());
-  $VM.$notify({
-    title: "提示",
-    message: "正在建设中。",
-    duration: 3000,
-  });
+const goS = (index) => {
+  console.log(index);
+  if (index == 0) {
+    window.open('https://shimo.im/docs/HG8w69hYHHwt6YVd/read');
+  } else if (index == 1) {
+    window.open('https://docs.qq.com/doc/DQlZZTEVFT2hJZWda');
+  } else if (index == 2) {
+    window.open('https://docs.qq.com/sheet/DYkd2dWpOakZZdXVN?tab=knq1lp');
+  }
 };
+
+const goDetail = () => {
+  console.log('getCurrentInstance().proxy', getCurrentInstance());
+  // $VM.$notify({
+  //   title: '提示',
+  //   message: '正在建设中。',
+  //   duration: 3000
+  // });
+  $VM.$store.commit('changeNavbar', '5');
+  $VM.$router.replace({ path: '/exp/school', query: { id: '1', type: 'home' } });
+};
+
 const goTutor = () => {
-  console.log("");
-  $VM.$notify({
-    title: "提示",
-    message: "正在建设中。",
-    duration: 3000,
-  });
+  console.log('');
+  // $VM.$notify({
+  //   title: '提示',
+  //   message: '正在建设中。',
+  //   duration: 3000
+  // });
+  $VM.$router.replace({ path: '/exp/school', query: { id: '1', type: 'home' } });
+};
+
+const goAdmin = () => {
+  window.location.href = 'http://129.211.219.138:8081';
 };
 </script>
 
@@ -184,6 +214,9 @@ const goTutor = () => {
 .home {
   width: 100%;
   min-width: 1250px;
+}
+.el-carousel__item {
+  min-width: 480px;
 }
 .el-carousel__item h3 {
   color: white;
@@ -294,6 +327,27 @@ const goTutor = () => {
   }
 }
 
+.info {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 100px;
+  right: 150px;
+  cursor: pointer;
+  &-img {
+  }
+
+  &-text {
+    /* width: 196px; */
+    font-size: 30px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 26px;
+    margin-left: 10px;
+  }
+}
+
 .info-title {
   font-size: 18px;
   font-weight: bold;
@@ -305,6 +359,7 @@ const goTutor = () => {
   text-align: left;
 }
 .intur-content-img {
+  min-width: 480px;
   width: 100%;
   height: 100%;
 }

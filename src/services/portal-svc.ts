@@ -109,6 +109,26 @@ class CompetitionCase {
     return { code, body, msg };
   }
 
+  // 学校信息
+  async school_info(query: { pageNum: number }): Promise<{ code: string; body: any; msg: any }> {
+    const { code, body, msg } = await PERFORMANCE_API.request(`/match/enroll/getList?pageSize=${query.pageNum}`, {
+      method: 'get',
+      // payload: query,
+      dataHandler: async (res: any, executor: any) => {
+        const _data = await executor(res, 'json');
+        const data: any = {
+          code: _data.code,
+          body: _data,
+          msg: _data.message
+        };
+
+        return data;
+      }
+    });
+
+    return { code, body, msg };
+  }
+
   async setStaffScore(query: { staffs: string }): Promise<Res<string, string>> {
     const staffs = 123;
     const { body } = await PERFORMANCE_API.request('/rest/performanceScore/setScoreByEmpId', {
