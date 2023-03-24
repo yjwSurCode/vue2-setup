@@ -2,16 +2,19 @@
   <div>
     <Crumbs title="2023-报名须知" />
     <div class="notice-page">
-      <img class="tempImg" src="@/assets/temp/temp11.jpg" alt="" />
+      <img class="tempImg" :src="noticeImg" alt="" />
     </div>
 
-    <div class="sub-btn">报名</div>
+    <div class="sub-btn" id="bm">报名</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Crumbs from '@/components/Crumbs/index.vue';
-import { defineAsyncComponent, computed } from 'vue';
+import { defineAsyncComponent, computed, ref } from 'vue';
+
+import noticeImg from '../../../assets/temp/temp11.jpg';
+
 // import Suspense from "vue";
 const HelloWorld = defineAsyncComponent(() => import('@/components/v2.7.vue'));
 // import HelloWorld from "@/components/v2.6.vue"; // @ is an alias to /src

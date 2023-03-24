@@ -10,10 +10,7 @@
       @select="handleSelect"
     >
       <el-menu-item index="1">
-        <img
-          src="./image/icon.png"
-          style="margin-top: -5px; width: 120px; height: 55px"
-        />
+        <img src="menuIcon" style="margin-top: -5px; width: 120px; height: 55px" />
       </el-menu-item>
       <!-- <el-menu-item
         index="2"
@@ -57,16 +54,13 @@
     <div class="intur">
       <div :style="{ textAlign: 'left', fontWeight: 'bold' }">赛事介绍</div>
       <p>
-        麻将，是中国最最最受欢迎的卡牌游戏，历史十分悠久，打法简单，变化无穷，非常有趣。
-        2O世纪初，麻将被美国商人JOSEPH P.BABCOCK介绍到西方，从此，麻将成为风靡世界的
+        麻将，是中国最最最受欢迎的卡牌游戏，历史十分悠久，打法简单，变化无穷，非常有趣。 2O世纪初，麻将被美国商人JOSEPH
+        P.BABCOCK介绍到西方，从此，麻将成为风靡世界的
         一款来自古老东方的神秘游戏。这是由青红皂白出品、艺术家PNK设计的一款颜值爆表的麻
-        将，艺术家用冷淡的线条和撩拨的色彩勾勒出这套史上最为矫情的麻将，为您的享乐之旅增
-        添某种奇异的上流体验。
+        将，艺术家用冷淡的线条和撩拨的色彩勾勒出这套史上最为矫情的麻将，为您的享乐之旅增 添某种奇异的上流体验。
       </p>
       <div :style="{ textAlign: 'left' }">
-        <el-button plain type="primary" @click="goDetail"
-          >了解我们<i class="el-icon-d-arrow-right"></i
-        ></el-button>
+        <el-button plain type="primary" @click="goDetail">了解我们<i class="el-icon-d-arrow-right"></i></el-button>
       </div>
 
       <img src="./image/uTools_1676357401715.png" alt="" />
@@ -81,13 +75,7 @@
           <el-col :span="0.5" style="margin-left: 2%; margin-top: 100px">
             <img src="../../assets/images/arrow-left.png" />
           </el-col>
-          <el-col
-            :span="4"
-            v-for="(o, index) in 4"
-            :key="o"
-            :offset="index > 0 ? 2 : 0"
-            style="margin-left: 4%"
-          >
+          <el-col :span="4" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0" style="margin-left: 4%">
             <el-card :body-style="{ padding: '0px' }">
               <img @click="goDetail" src="./image/info.png" class="image" />
               <div style="padding: 14px">
@@ -109,14 +97,16 @@
 <script>
 // import { vuex } from "@/";
 
+import menuIcon from './image/icon.png';
+
 export default {
   components: {},
   data() {
     return {
-      inputValue: "",
-      activeIndex: "",
-      searchInput: "",
-      category: [],
+      inputValue: '',
+      activeIndex: '',
+      searchInput: '',
+      category: []
     };
   },
   computed: {
@@ -127,9 +117,9 @@ export default {
   methods: {
     goDetail() {
       this.$notify({
-        title: "提示",
-        message: "正在建设中。",
-        duration: 0,
+        title: '提示',
+        message: '正在建设中。',
+        duration: 0
       });
     },
     changeIndex(index) {
@@ -146,21 +136,21 @@ export default {
     },
     handleSelect(index) {
       switch (index) {
-        case "1":
-          this.$router.push({ path: "/home" });
+        case '1':
+          this.$router.push({ path: '/home' });
           break;
-        case "2":
-          this.$router.push({ path: "/home" });
+        case '2':
+          this.$router.push({ path: '/home' });
           break;
-        case "3":
-          this.$router.push({ path: "/home" });
+        case '3':
+          this.$router.push({ path: '/home' });
           break;
         default:
-          console.log("no ");
+          console.log('no ');
       }
       console.log(index);
-    },
-  },
+    }
+  }
 };
 </script>
 

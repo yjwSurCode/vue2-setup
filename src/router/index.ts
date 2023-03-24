@@ -101,9 +101,8 @@ const routes: Array<any> = [
       {
         path: 'audition',
         name: 'audition',
-        component: () => import('@/views/exp/audition/index.vue')
-      },
-
+        component: () => import('@/views/exp/group/audition.vue')
+      }
     ]
   },
   {

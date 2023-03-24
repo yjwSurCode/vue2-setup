@@ -2,7 +2,7 @@
   <div class="breadcrumb-com">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">
-        <img :style="{ width: '10px', height: '10px' }" src="@/assets/svg/home.svg" alt="" />
+        <img :style="{ width: '10px', height: '10px' }" :src="homeImg" alt="" />
         首页</el-breadcrumb-item
       >
       <el-breadcrumb-item :to="{ path: '/' }"> {{ title ? title.split('-')[0] : '报名系统' }}</el-breadcrumb-item>
@@ -30,13 +30,15 @@ import {
   Directive
 } from 'vue';
 
+import homeImg from '../../assets/svg/home.svg';
+
 withDefaults(
   defineProps<{
     title: string;
     // list: number[];
   }>(),
   {
-    title: '',
+    title: ''
     // list: () => [4, 5, 6]
   }
 );

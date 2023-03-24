@@ -1,8 +1,8 @@
 <template>
   <div>
     <Crumbs title="2023-赛事规则" />
-    <div class="notice-page">
-      <img class="tempImg" src="@/assets/temp/temp44.jpg" alt="" />
+    <div class="rule-page">
+      <img class="tempImg" :src="ruleImg" alt="" />
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import Crumbs from '@/components/Crumbs/index.vue';
 import { defineAsyncComponent, computed } from 'vue';
-// import Suspense from "vue";
+import ruleImg from '@/assets/temp/temp44.jpg';
 const HelloWorld = defineAsyncComponent(() => import('@/components/v2.7.vue'));
 // import HelloWorld from "@/components/v2.6.vue"; // @ is an alias to /src
 
@@ -22,7 +22,7 @@ const HelloWorld = defineAsyncComponent(() => import('@/components/v2.7.vue'));
 .tempImg {
   width: 100%;
 }
-.notice-page {
+.rule-page {
   background-color: #ffffff;
   padding-bottom: 50px;
   padding: 0px 100px;

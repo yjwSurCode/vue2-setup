@@ -12,3 +12,6 @@ declare module 'vue-esign';
 
 declare const __PROJECT__: any;
 declare const SURCODE: any;
+
+declare module '*.jpg';
+declare module '*.svg';

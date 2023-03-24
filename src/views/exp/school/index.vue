@@ -3,7 +3,7 @@
     <Crumbs title="参赛学校-2023季后赛学校" />
     <div class="school-page">
       <el-table :data="tableData" v-loading="tableLoading" stripe style="width: 100%">
-        <el-table-column type="index" align="center" label="序号" width="180"> </el-table-column>
+        <el-table-column prop="idd" align="center" label="序号" width="180"> </el-table-column>
         <el-table-column prop="school" align="center" label="参赛学校" width="180"> </el-table-column>
         <el-table-column prop="groupNickname" align="center" label="领队昵称"> </el-table-column>
         <el-table-column prop="qq" align="center" label="领队QQ">
@@ -235,12 +235,38 @@ const handleSizeChange = (e: any) => {
 };
 const handleCurrentChange = (e: any) => {
   console.log(e, 'handleCurrentChange');
+
+  let arr = [0, 10];
+  if (e === 1) {
+    arr = [0, 10];
+  } else {
+    // arr = [10, 20];
+    arr = [(e - 1) * 10, e * 10];
+  }
+  // } else if (e === 3) {
+  //   arr = [20, 30];
+  // } else if (e === 4) {
+  //   arr = [30, 40];
+  // } else if (e === 5) {
+  //   arr = [40, 50];
+  // } else if (e === 6) {
+  //   arr = [50, 60];
+  // } else if (e === 7) {
+  //   arr = [50, 60];
+  // } else if (e === 8) {
+  //   arr = [70, 80];
+  // } else if (e === 9) {
+  //   arr = [80, 90];
+  // } else if (e === 10) {
+  //   arr = [90, 100];
+  // }
   //   1  0 10
   //   2  10 20
   //   3  30 40
   //   4  40 50
   //!
-  //   tableData.value = allResultArr.value.splice(e == 1 ? 0 : e * 10, e == 1 ? 10 : e * 10 + 10);
+  tableData.value = allResultArr.value.slice(arr[0], arr[1]);
+  // tableData.value = allResultArr.value.slice(10, 20);
 };
 
 const totalPage = ref(1);
@@ -255,11 +281,10 @@ const pageInit = async () => {
     const resultArr = e.body.rows.filter((item: any) => item.isLeader == 1 && item.status != 2);
 
     totalPage.value = resultArr.length;
-    allResultArr.value = resultArr;
 
-    const _res = resultArr.filter((e: any) => {
+    resultArr.filter((e: any) => {
       //   e.isLeader == 1 &&
-      newArr.find((i) => {
+      newArr.find((i, k) => {
         if (e.school == i.school) {
           return (e.link = i.link ? i.link : '-');
         } else {
@@ -268,8 +293,14 @@ const pageInit = async () => {
       });
     });
 
-    // tableData.value = resultArr.slice(10, 20);
-    tableData.value = resultArr;
+    const _res = resultArr.map((element: any, index: number) => {
+      return { ...element, idd: index + 1 };
+    });
+
+    allResultArr.value = _res;
+
+    tableData.value = _res.slice(0, 10);
+    // tableData.value = _res;
 
     tableLoading.value = false;
 

@@ -2,7 +2,7 @@
   <div>
     <Crumbs title="2023-赛制安排" />
     <div class="arrange-page">
-      <img class="tempImg" src="@/assets/temp/temp33.jpg" alt="" />
+      <img class="tempImg" :src="arrange" alt="" />
     </div>
   </div>
 </template>
@@ -10,6 +10,8 @@
 <script setup lang="ts">
 import Crumbs from '@/components/Crumbs/index.vue';
 import { defineAsyncComponent, computed } from 'vue';
+
+import arrange from '@/assets/temp/temp33.jpg';
 // import Suspense from "vue";
 const HelloWorld = defineAsyncComponent(() => import('@/components/v2.7.vue'));
 // import HelloWorld from "@/components/v2.6.vue"; // @ is an alias to /src
