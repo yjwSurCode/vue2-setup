@@ -58,7 +58,12 @@
           src="../../assets/images/home1.png"
           alt=""
         />
-        <img :style="{ width: '100%', display: 'block' }" @click="goDetail" src="../../assets/images/home.png" alt="" />
+        <img
+          :style="{ width: '100%', display: 'block', cursor: 'pointer' }"
+          @click="goDetail"
+          src="../../assets/images/home.png"
+          alt=""
+        />
 
         <div :style="{ position: 'relative' }">
           <img
