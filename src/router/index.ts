@@ -96,7 +96,14 @@ const routes: Array<any> = [
         // subPath: "/exp",
         name: 'tutor'
         // component: () => import('@/views/exp/tutor/index.vue')
-      }
+      },
+      // ! 分组
+      {
+        path: 'audition',
+        name: 'audition',
+        component: () => import('@/views/exp/audition/index.vue')
+      },
+
     ]
   },
   {

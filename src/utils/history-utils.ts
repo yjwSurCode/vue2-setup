@@ -153,7 +153,8 @@ export class SearchParams {
     const query = this.query;
 
     Object.getOwnPropertyNames(query).forEach((name) => {
-      query[name]?.forEach((value) => {
+      //! unknow
+      query[name]?.forEach((value: any) => {
         callback.call(thisArg as any, value, name, this);
       });
     });

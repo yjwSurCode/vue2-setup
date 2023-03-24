@@ -1,5 +1,8 @@
 <template>
-  <div class="navbar-page" :style="isAdmin ? { position: 'absolute', marginLeft: '200px' } : {}">
+  <div
+    class="navbar-page"
+    :style="isAdmin ? { position: 'absolute', marginLeft: '200px' } : {}"
+  >
     <!-- //! 统一高度 -->
     <el-menu
       :style="{ height: '65px' }"
@@ -12,7 +15,10 @@
       @select="handleSelect"
     >
       <el-menu-item index="2">
-        <img src="../../assets/images/icon.jpg" style="margin-top: -5px; width: 120px; padding: 10px 10px" />
+        <img
+          src="../../assets/images/icon.jpg"
+          style="margin-top: -5px; width: 120px; padding: 10px 10px"
+        />
       </el-menu-item>
       <el-menu-item index="3">首页</el-menu-item>
       <el-submenu index="4">
@@ -84,20 +90,20 @@ import {
   watchEffect,
   getCurrentInstance,
   Directive,
-  onMounted
-} from 'vue';
+  onMounted,
+} from "vue";
 
 // emptyAvatar
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations } from "vuex";
 
 const useVM = () => {
   const vm = getCurrentInstance();
-  if (!vm) throw new Error('must be called in setup');
+  if (!vm) throw new Error("must be called in setup");
   return vm.proxy;
 };
 const useRouter = () => {
   const vm = getCurrentInstance();
-  if (!vm) throw new Error('must be called in setup');
+  if (!vm) throw new Error("must be called in setup");
   return vm.proxy.$router;
 };
 const $VM = useVM();
@@ -109,16 +115,16 @@ withDefaults(
     // list: number[]
   }>(),
   {
-    isAdmin: false
+    isAdmin: false,
     // list: () => [4, 5, 6],
   }
 );
 
 const _navbarSelect = ref($VM.$store.state.navbarSelect);
-const userInfo = ref('123');
+const userInfo = ref("123");
 
 onMounted(() => {
-  console.log('$VM', $VM.$store);
+  console.log("$VM", $VM.$store);
   // _navbarSelect.value = $VM.$store._mutations.changeNavbar("888");
 
   // $VM.$store.commit("changeNavbar", "5");
@@ -143,12 +149,12 @@ onMounted(() => {
 
 const callbackM = () => {
   console.log(1);
-  localStorage.removeItem('userAccount');
-  localStorage.removeItem('token');
+  localStorage.removeItem("userAccount");
+  localStorage.removeItem("token");
 
   $VM.$message({
-    message: '退出成功',
-    type: 'success'
+    message: "退出成功",
+    type: "success",
   });
   setTimeout(() => {
     router.go(0);
@@ -157,11 +163,11 @@ const callbackM = () => {
 
 const logoutM = () => {
   console.log(2);
-  localStorage.removeItem('userAccount');
-  localStorage.removeItem('token');
+  localStorage.removeItem("userAccount");
+  localStorage.removeItem("token");
   $VM.$message({
-    message: '退出成功',
-    type: 'success'
+    message: "退出成功",
+    type: "success",
   });
   setTimeout(() => {
     router.go(0);
@@ -171,111 +177,108 @@ const handleUser = () => {
   console.log(1);
 };
 
-const activeIndex = ref('3');
-const inputValue = ref('');
+const activeIndex = ref("3");
+const inputValue = ref("");
 const handleSelect = (index: string) => {
   console.log(index, typeof index, router);
 
   switch (index) {
-    case '1':
-      router.replace('/');
+    case "1":
+      router.replace("/");
       break;
-    case '2':
-      router.replace('/');
-      $VM.$store.commit('changeNavbar', '2');
+    case "2":
+      router.replace("/");
+      $VM.$store.commit("changeNavbar", "2");
       break;
-    case '3':
-      router.replace('/');
-      $VM.$store.commit('changeNavbar', '3');
+    case "3":
+      router.replace("/");
+      $VM.$store.commit("changeNavbar", "3");
       break;
-    case '4':
-      $VM.$store.commit('changeNavbar', '4');
+    case "4":
+      $VM.$store.commit("changeNavbar", "4");
       // $VM.$store.dispatch("asyncChangeNavbar", "8");
       $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
+        title: "提示",
+        message: "正在建设中。",
+        duration: 3000,
       });
       break;
-    case '4-1':
-      $VM.$store.commit('changeNavbar', '4-1');
-      router.replace({ path: '/exp/notice', query: { id: '1', type: 'home' } });
+    case "4-1":
+      $VM.$store.commit("changeNavbar", "4-1");
+      router.replace({ path: "/exp/notice", query: { id: "1", type: "home" } });
       break;
-    case '4-2':
-      $VM.$store.commit('changeNavbar', '4-2');
-      router.replace({ path: '/exp/warn', query: { id: '1', type: 'home' } });
+    case "4-2":
+      $VM.$store.commit("changeNavbar", "4-2");
+      router.replace({ path: "/exp/warn", query: { id: "1", type: "home" } });
       break;
-    case '4-3':
-      $VM.$store.commit('changeNavbar', '4-3');
-      router.replace({ path: '/exp/arrange', query: { id: '1', type: 'home' } });
+    case "4-3":
+      $VM.$store.commit("changeNavbar", "4-3");
+      router.replace({ path: "/exp/arrange", query: { id: "1", type: "home" } });
       break;
-    case '4-4':
-      $VM.$store.commit('changeNavbar', '4-4');
-      router.replace({ path: '/exp/rule', query: { id: '1', type: 'home' } });
+    case "4-4":
+      $VM.$store.commit("changeNavbar", "4-4");
+      router.replace({ path: "/exp/rule", query: { id: "1", type: "home" } });
       break;
-    case '4-5':
-      $VM.$store.commit('changeNavbar', '4-5');
-      router.replace({ path: '/exp/introduce', query: { id: '1', type: 'home' } });
+    case "4-5":
+      $VM.$store.commit("changeNavbar", "4-5");
+      router.replace({ path: "/exp/introduce", query: { id: "1", type: "home" } });
       break;
-    case '5':
-      $VM.$store.commit('changeNavbar', '5');
-      router.replace({ path: '/exp/school', query: { id: '1', type: 'home' } });
+    case "5":
+      $VM.$store.commit("changeNavbar", "5");
+      router.replace({ path: "/exp/school", query: { id: "1", type: "home" } });
       break;
-    case '6':
-      $VM.$store.commit('changeNavbar', '6');
-      router.replace({ path: '/exp/integral', query: { id: '1', type: 'home' } });
+    case "6":
+      $VM.$store.commit("changeNavbar", "6");
+      router.replace({ path: "/exp/integral", query: { id: "1", type: "home" } });
       break;
-    case '7':
+    case "7":
       $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
+        title: "提示",
+        message: "正在建设中。",
+        duration: 3000,
       });
       break;
-    case '8':
-      $VM.$store.commit('changeNavbar', '8');
-      router.replace({ path: '/enroll', query: { id: '1', type: 'home' } });
+    case "8":
+      $VM.$store.commit("changeNavbar", "8");
+      router.replace({ path: "/enroll", query: { id: "1", type: "home" } });
       break;
-    case '9':
-      window.location.href = 'http://129.211.219.138:8081';
+    case "9":
+      window.location.href = "http://129.211.219.138:8081";
       break;
-    case '10-1':
+    case "10-1":
+      $VM.$store.commit("changeNavbar", "10-1");
+      router.replace({ path: "/exp/audition", query: { id: "1", type: "home" } });
+      break;
+    case "10-2":
       $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
+        title: "提示",
+        message: "正在建设中。",
+        duration: 3000,
       });
       break;
-    case '10-2':
+    case "10-3":
       $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
+        title: "提示",
+        message: "正在建设中。",
+        duration: 3000,
       });
       break;
-    case '10-3':
+    case "10-4":
       $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
+        title: "提示",
+        message: "正在建设中。",
+        duration: 3000,
       });
       break;
-    case '10-4':
+    case "11":
       $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
-      });
-      break;
-    case '11':
-      $VM.$notify({
-        title: '提示',
-        message: '正在建设中。',
-        duration: 3000
+        title: "提示",
+        message: "正在建设中。",
+        duration: 3000,
       });
       break;
     default:
-      console.log('no ');
+      console.log("no ");
   }
   console.log(index);
 };
